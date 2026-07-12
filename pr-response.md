@@ -56,21 +56,9 @@ Manual testing steps:
 9. Remove an entry with `curl -X DELETE http://127.0.0.1:5000/watchlist/<user_id>/remove -H 'Content-Type: application/json' -d '{"film_id":"<film_id>"}'`.
 
 ## Git Log Screenshot
-The final `git log --oneline origin/main..HEAD` output shows conventional commits and no merge commits:
+The final `git log --oneline main..HEAD` output shows conventional commits and no merge commits:
 
-```text
-docs: add PR response document
-fix: use session get for collection film lookup
-test: add watchlist edge case coverage
-feat: add watchlist removal
-feat: add watchlist visibility toggle
-fix: sort watchlist by date added
-fix: update watchlist film IDs for UUID refactor
-test: add nonexistent film watchlist coverage
-fix: prevent duplicate watchlist entries
-fix: rename watchlist add service
-feat: add initial watchlist feature
-```
+![git log --oneline main..HEAD showing rewritten conventional commits](git-log-screenshot.png)
 
 ## Stretch: Remove from watchlist
 I added `remove_from_watchlist(user_id, film_id)` and `DELETE /watchlist/<user_id>/remove`. The function follows the `remove_from_collection()` pattern: query for the user/film entry, raise `NotInWatchlistError` if it does not exist, delete it if it does, commit, and return `True`. I wrote tests for both successful removal and the missing-entry error case.
